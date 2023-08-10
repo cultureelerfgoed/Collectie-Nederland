@@ -1,5 +1,5 @@
 # Zesde conversie omzetten <skos:prefLabel> en </skos:prefLabel> naar <dcterms:subject> en </dcterms:subject>
-
+#test
 import re
 
 # Lees het RDF/XML-bestand
