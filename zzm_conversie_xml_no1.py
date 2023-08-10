@@ -2,7 +2,7 @@
 import re
 
 # Lees het RDF/XML-bestand
-with open('/Users/patrickmout/Downloads/zzm/zzm_conversie_test_file.xml', 'r') as file:
+with open('zuiderzeemuseum.rdf', 'r', encoding='utf-8') as file:
     rdf_content = file.read()
 
 # Definieer de begintag die je wilt toevoegen
@@ -24,6 +24,6 @@ target_endtag = "</nave:DelvingResource>"
 modified_content_end = modified_content_begin.replace(target_endtag, target_endtag + "\n" + new_endtag)
 
 # Schrijf het aangepaste XML-bestand
-with open('/Users/patrickmout/Downloads/zzm/zzm_aangepast_stap1_xml.rdf', 'w') as file:
+with open('zzm_aangepast_stap1_xml.rdf', 'w', encoding='utf-8') as file:
     file.write(modified_content_end)
 

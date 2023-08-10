@@ -1,16 +1,21 @@
-# Twee conversie toevoegen aan tag <skos:Concept> <dcterms:subject...
-
 import re
 
+# Vraag de gebruiker om de naam van het inputbestand
+input_filename = input("Voer de naam van het inputbestand in (bijv. 'zuiderzeemuseum.rdf'): ")
+
+# Vraag de gebruiker om de naam van het outputbestand
+output_filename = input("Voer de naam van het outputbestand in (bijv. 'zzm_aangepast_stap2_xml.rdf'): ")
+
 # Lees het RDF/XML-bestand
-with open("/Users/patrickmout/Downloads/zzm/zzm_aangepast_stap1_xml.rdf", 'r') as file:
+with open(input_filename, 'r', encoding='utf-8') as file:
     rdf_content = file.read()
 
 # Zoek naar alle voorkomens van <skos:Concept>...</skos:Concept> blokken
 concept_blocks = re.findall(r'<sys:Object>.*?</sys:Object>', rdf_content, re.DOTALL)
 
 # Lus door de gevonden blokken
-for concept_block in concept_blocks:
+total_blocks = len(concept_blocks)
+for index, concept_block in enumerate(concept_blocks, start=1):
     # Zoek de inhoud tussen <dc:identifier>...</dc:identifier> binnen elk concept_block
     identifier_match = re.search(r'<dc:identifier>(.*?)</dc:identifier>', concept_block, re.DOTALL)
 
@@ -24,6 +29,11 @@ for concept_block in concept_blocks:
         # Vervang het oorspronkelijke concept_block door het gewijzigde concept_block in rdf_content
         rdf_content = rdf_content.replace(concept_block, modified_block)
 
+    # Print voortgangsindicator
+    print(f"Verwerking blok {index} van {total_blocks}")
+
 # Schrijf het aangepaste XML-bestand
-with open('/Users/patrickmout/Downloads/zzm/zzm_aangepast_stap2_xml.rdf', 'w') as file:
+with open(output_filename, 'w', encoding='utf-8') as file:
     file.write(rdf_content)
+
+print("Conversie voltooid!")
