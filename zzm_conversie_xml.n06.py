@@ -12,3 +12,6 @@ modified_content = re.sub(r'<skos:prefLabel>(.*?)</skos:prefLabel>', r'<dcterms:
 # Schrijf het aangepaste XML-bestand
 with open('/Users/patrickmout/Downloads/zzm/zzm_aangepast_stap6_xml.rdf', 'w') as file:
     file.write(modified_content)
+	
+	
+	#TEST JOOP
